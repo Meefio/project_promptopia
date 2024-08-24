@@ -43,10 +43,8 @@ export const PATCH = async (request, { params }) => {
 		return new Response('Error Updating Prompt', { status: 500 })
 	}
 }
-
+//problem z deleting - nie usuwa w bazie z jakiegoś powodu
 export const DELETE = async (request, { params }) => {
-	const { id } = params
-	console.log(id) // Should print the ID
 	try {
 		await connectToDB()
 
