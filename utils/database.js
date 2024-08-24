@@ -1,18 +1,19 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
+const dotenv = require('dotenv').config(__dirname + '/../.env')
 
-let isConnected = false; // Globalna zmienna do śledzenia statusu połączenia
+let isConnected = false // Globalna zmienna do śledzenia statusu połączenia
 
 export const connectToDB = async () => {
-	mongoose.set('strictQuery', true);
+	mongoose.set('strictQuery', true)
 
 	if (isConnected) {
 		try {
 			// Sprawdź, czy połączenie jest nadal aktywne
-			await mongoose.connection.db.admin().ping();
-			return; // Jeśli połączenie jest aktywne, zakończ funkcję
+			await mongoose.connection.db.admin().ping()
+			return // Jeśli połączenie jest aktywne, zakończ funkcję
 		} catch (error) {
-			console.log('Lost MongoDB connection, reconnecting...');
-			isConnected = false; // Połączenie zostało utracone, ustaw isConnected na false
+			console.log('Lost MongoDB connection, reconnecting...')
+			isConnected = false // Połączenie zostało utracone, ustaw isConnected na false
 		}
 	}
 
@@ -22,13 +23,13 @@ export const connectToDB = async () => {
 				dbName: 'share_prompt',
 				useNewUrlParser: true,
 				useUnifiedTopology: true,
-			});
+			})
 
-			isConnected = true;
-			console.log('MongoDB Connected');
+			isConnected = true
+			console.log('MongoDB Connected')
 		} catch (error) {
-			console.log('Error connecting to MongoDB:', error);
-			isConnected = false; 
+			console.log('Error connecting to MongoDB:', error)
+			isConnected = false
 		}
 	}
-};
+}
