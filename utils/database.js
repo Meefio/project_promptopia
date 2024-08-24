@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
-const dotenv = require('dotenv').config(__dirname + '/../.env')
+const dotenv = require('dotenv')
+
+dotenv.config(__dirname + '/../.env')
 
 let isConnected = false // Globalna zmienna do śledzenia statusu połączenia
 
